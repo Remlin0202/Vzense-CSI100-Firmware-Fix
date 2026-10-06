@@ -17,7 +17,7 @@
 | **`README.md`** / `LICENSE` | 本说明 / 许可（原创部分 MIT） |
 | **`01_文档/`** | **`CSI100_烧录图文教程.pdf`（烧录图文教程，先看这个）** |
 | **`02_一键修补/`** | `一键修补镜像.bat` + `csi100_patch_image.py`（一键修补）+ `_hash_recalc.py` / `_verify_e2e.py`（验证）+ `_fw_artifacts/`（LZO 库与包装源码） |
-| **`03_SDK与工具/`** | **`获取说明.md`（第三方 SDK / 工具的官方下载渠道）+ `fetch_deps.sh` / `fetch_deps.bat`（一键 clone 官方 SDK）+ `sdk_probe.py`（验收探针）**。⚠️ Vzense SDK、RKDevTool、DriverAssitant **不随仓库分发** —— 版权归各自厂商、无再分发授权，请跑一下 `fetch_deps` 或按 `获取说明.md` 自行下载 |
+| **`03_SDK与工具/`** | **`获取说明.md`（第三方 SDK / 工具的官方下载渠道）+ `fetch_deps.sh` / `fetch_deps.bat`（一键 clone 官方 SDK 与 UTool）+ `sdk_probe.py`（验收探针）**。⚠️ Vzense SDK、UTool、RKDevTool、DriverAssitant **不随仓库分发** —— 版权归各自厂商、无再分发授权，请跑一下 `fetch_deps` 或按 `获取说明.md` 自行下载 |
 | **`04_ROS2驱动/`** | `csi100_ros2/` —— 我们写的 ROS 2 包 `csi100_driver`（深度 / IR / 点云） |
 | **`05_bootloader/`** | `rkloader/loader_RK110A.bin` —— 刷机「下载 Boot」用的 loader（我们打包的） |
 
@@ -39,7 +39,8 @@
 ⑥ 整片写入      RKDevTool → 下载镜像 → 勾「强制按地址写」→ 地址 0x00000000
                 → 选 CSI100_patched.img → 执行
 ⑦ 断电重启      不碰按键
-⑧ 验收          用 Vzense Utool 能检测到设备、能看到图 → 成功（图文步骤见 01_文档/）
+⑧ 验收          用 Vzense UTool 能检测到设备、能看到图 → 成功（图文步骤见 01_文档/）
+                UTool 是官方 Windows 验机工具：https://github.com/Vzense/UTool
 ```
 
 **出问题就整片写回第 ④ 步导出的原始镜像**（同样流程，地址 `0x0`）即可恢复。
@@ -71,6 +72,7 @@ ros2 launch csi100_driver csi100_driver.launch.py
 |---|---|---|
 | **固件镜像**（原始 / 补丁后） | 设备厂商固件，有版权；且每台设备应各自从自己机器上取一份 | 用 RKDevTool 从**你自己的设备**导出（快速开始第 ④ 步），再用本仓库脚本打补丁 |
 | **Vzense SDK**（Windows / Linux） | 第三方 SDK，无再分发授权 | 官方 GitHub：<https://github.com/Vzense/Vzense_SDK_Windows> 、<https://github.com/Vzense/Vzense_SDK_Linux> |
+| **Vzense UTool**（Windows 验机工具） | 官方工具，无再分发授权 | 官方 GitHub：<https://github.com/Vzense/UTool> |
 | **RKDevTool / DriverAssitant** | 瑞芯微工具，无再分发授权 | 瑞芯微官方发布页；或见 Radxa 文档 <https://docs.radxa.com/zero/zero3/low-level-dev/rkdevtool> |
 
 上面这些下载后**放进 `03_SDK与工具/` 对应位置**即可（仓库的 `.gitignore` 已排除它们，

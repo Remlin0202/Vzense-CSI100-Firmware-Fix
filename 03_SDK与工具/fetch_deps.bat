@@ -30,6 +30,10 @@ call :clone https://github.com/Vzense/Vzense_SDK_Windows.git VzenseSDK_Windows
 call :clone https://github.com/Vzense/Vzense_SDK_Linux.git   VzenseSDK_Linux
 
 echo.
+echo === Vzense UTool（Windows 验机工具，可选）===
+call :clone https://github.com/Vzense/UTool.git VzenseUTool
+
+echo.
 echo === RKDevTool / DriverAssitant ===
 echo   这两个【没有官方 git 仓库】，需要手动下载后放到本目录：
 echo     RKDevTool_Release.zip   ^<- 烧写工具
