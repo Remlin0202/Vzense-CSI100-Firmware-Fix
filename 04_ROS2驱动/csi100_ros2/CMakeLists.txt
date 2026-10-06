@@ -53,15 +53,6 @@ set_target_properties(csi100_driver_node PROPERTIES
 install(TARGETS csi100_driver_node
   DESTINATION lib/${PROJECT_NAME})
 
-# ---- web point-cloud bridge (no SDK, read-only ROS subscriber + HTTP) ------
-add_executable(cloud_web_bridge src/cloud_web_bridge.cpp)
-target_link_libraries(cloud_web_bridge
-  rclcpp::rclcpp
-  ${sensor_msgs_TARGETS}
-  pthread)
-install(TARGETS cloud_web_bridge
-  DESTINATION lib/${PROJECT_NAME})
-
 install(DIRECTORY launch config
   DESTINATION share/${PROJECT_NAME}
   OPTIONAL)
