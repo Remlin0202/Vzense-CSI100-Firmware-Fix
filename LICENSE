@@ -1,0 +1,62 @@
+MIT License
+
+Copyright (c) 2026 CSI100 项目贡献者
+（文档、csi100_patch_image.py 及配套脚本、04_ROS2驱动 等原创部分）
+
+--------------------------------------------------------------------------
+【不在 MIT 覆盖范围内的内容 —— 请特别注意】
+--------------------------------------------------------------------------
+1. 05_bootloader/rkloader/ 下的 loader 及 rkbin 零件：
+   由 **Rockchip 官方 boot_merger 工具**打包而成，其中的 DDR 初始化 / usbplug /
+   miniloader 零件均为 **Rockchip 的预编译二进制**，版权归 Rockchip。
+   本项目只是"打包"（选零件 + 选参数），**未编写或编译任何 loader 代码**，
+   因此无权对其授予 MIT 许可。请遵循 Rockchip 的原始许可条款。
+   其官方来源：https://github.com/rockchip-linux/rkbin
+
+2. 03_SDK与工具/ 下的 Vzense SDK（Windows / Linux）：
+   版权归 **Vzense（维感科技）**，遵循其 SDK 许可。
+   官方来源：https://github.com/Vzense/Vzense_SDK_Windows
+             https://github.com/Vzense/Vzense_SDK_Linux
+
+3. 03_SDK与工具/ 下的 RKDevTool_Release.zip / DriverAssitant.zip：
+   版权归 **Rockchip**，遵循其原始许可。
+
+4. 02_一键修补/_fw_artifacts/ 下的 lzo999.dll / lzodll.dll：
+   由开源 **LZO 2.10** 库编译而成，遵循 **GPL**；包装源码见同目录 wrap999.c。
+   上游源码：https://www.oberhumer.com/opensource/lzo/
+
+5. 相机固件镜像（CSI100_原始固件.img / 补丁后镜像）：
+   **本仓库不包含**，也不应分发 —— 那是设备厂商的固件，有版权。
+--------------------------------------------------------------------------
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+第三方组件许可说明（不在本 LICENSE 覆盖范围）：
+
+- 04_ROS2驱动/csi100_ros2 —— Apache-2.0（见该包 package.xml，兼容 MIT 分发）
+- 02_一键修补/_fw_artifacts/lzo999.dll、lzodll.dll —— 开源 LZO 2.10（GPL），
+  包装源码见同目录 wrap.c / wrap999.c，上游：https://www.oberhumer.com/opensource/lzo/
+- 05_bootloader/rkloader/loader_*.bin —— 自建 loader；其中的零件（rkbin）来自瑞芯微
+  公开仓库：https://github.com/rockchip-linux/rkbin
+- 03_SDK与工具/ —— Vzense SDK（Windows/Linux）、RKDevTool、DriverAssitant：
+  官方公开发布的免费开发工具，随包附送以便开箱即用；
+  官方渠道见 README 末尾，如你所在环境要求严格合规，可删除该目录后自行按官方渠道获取
+- 固件镜像（原始 / 补丁后）—— 有版权，**禁止再分发**，请从自己的设备导出

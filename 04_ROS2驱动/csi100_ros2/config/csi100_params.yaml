@@ -1,0 +1,18 @@
+csi100_driver:
+  ros__parameters:
+    frame_id: csi100_depth_optical_frame
+    # PsDataMode:
+    #   0 = PsDepthAndRGB_30  -> no RGB sensor on this model, so: DEPTH ONLY,
+    #       measured 29.7 Hz (full rate). Default: this is what road scanning wants.
+    #   2 = PsDepthAndIR_30   -> depth + IR, but both then share the USB 2.0
+    #       bandwidth and each runs at ~22 Hz. Use when you need the IR image.
+    data_mode: 0
+    # PsDepthRange: 0 = near, 1 = mid, 2 = far
+    depth_range: 1
+    publish_pointcloud: true
+    pointcloud_stride: 2
+    # clamp everything beyond this to invalid (0 = keep raw)
+    max_range_mm: 0
+    # re-init the camera if no frame arrives for this many seconds
+    reconnect_timeout: 5.0
+    device_index: 0
