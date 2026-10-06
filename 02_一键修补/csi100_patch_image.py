@@ -90,8 +90,8 @@ def load_lzo():
         if not os.path.exists(p):
             die("缺少 %s\n  这两个 DLL 是重打包必需的（源码见 _fw_artifacts/wrap999.c）" % p)
     if struct.calcsize("P") != 8:
-        die("当前 Python 是 32 位（%d 位）。本脚本依赖的 LZO DLL 是 x86-64，"
-            "请改用 64 位 Python。\n  安装：https://www.python.org/ 勾选 64-bit" % (struct.calcsize("P") * 8))
+        die("当前 Python 是 %d 位；本脚本依赖的 LZO DLL 是 x86-64，需要 64 位 Python。"
+            % (struct.calcsize("P") * 8))
     try:
         dec = ctypes.CDLL(DLL_DEC)
         enc = ctypes.CDLL(DLL_999)

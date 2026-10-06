@@ -40,9 +40,7 @@ exit /b 1
 
 :nopython
 echo.
-echo [ERROR] Python 3 not found.
-echo   Install from https://www.python.org/  and tick "Add Python
-echo   to PATH". 64-bit Python is required.
+echo [ERROR] Python 3 not found (64-bit required).
 echo.
 pause
 exit /b 1
