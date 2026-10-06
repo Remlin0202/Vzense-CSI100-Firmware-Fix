@@ -17,19 +17,21 @@
 | **`README.md`** / `LICENSE` | 本说明 / 许可（原创部分 MIT） |
 | **`01_文档/`** | **`CSI100_烧录图文教程.pdf`（烧录图文教程，先看这个）** |
 | **`02_一键修补/`** | `一键修补镜像.bat` + `csi100_patch_image.py`（一键修补）+ `_hash_recalc.py` / `_verify_e2e.py`（验证）+ `_fw_artifacts/`（LZO 库与包装源码） |
-| **`03_SDK与工具/`** | **`获取说明.md`（第三方 SDK / 工具的官方下载渠道）+ `sdk_probe.py`（验收探针）**。⚠️ Vzense SDK、RKDevTool、DriverAssitant **不随仓库分发** —— 版权归各自厂商、无再分发授权，请按 `获取说明.md` 自行下载后放进本目录 |
+| **`03_SDK与工具/`** | **`获取说明.md`（第三方 SDK / 工具的官方下载渠道）+ `fetch_deps.sh` / `fetch_deps.bat`（一键 clone 官方 SDK）+ `sdk_probe.py`（验收探针）**。⚠️ Vzense SDK、RKDevTool、DriverAssitant **不随仓库分发** —— 版权归各自厂商、无再分发授权，请跑一下 `fetch_deps` 或按 `获取说明.md` 自行下载 |
 | **`04_ROS2驱动/`** | `csi100_ros2/` —— 我们写的 ROS 2 包 `csi100_driver`（深度/IR/点云 + Web 点云桥） |
-| **`05_bootloader/`** | `rkloader/loader_RV1108.bin` —— 刷机「下载 Boot」用的 loader（我们打包的） |
+| **`05_bootloader/`** | `rkloader/loader_RK110A.bin` —— 刷机「下载 Boot」用的 loader（我们打包的） |
 
 ---
 
 ## 快速开始（Windows，从零到能用约 20 分钟）
 
 ```
+⓪ 拉依赖        双击 03_SDK与工具/fetch_deps.bat（自动 clone 官方 SDK；
+                并提示 RKDevTool / DriverAssitant 的下载页）
 ① 装驱动        解压 03_SDK与工具/DriverAssitant.zip → 运行 InstallDriver.exe
 ② 进 maskrom    相机断电 → 按住 USB 小板上按键不松 → 插 12V → 插 USB → 保持 15s → 松开
                 （RKDevTool 底部应显示「发现一个 MASKROM 设备」）
-③ 下载 Boot     RKDevTool → 高级功能 → Boot: 05_bootloader/rkloader/loader_RV1108.bin → 下载
+③ 下载 Boot     RKDevTool → 高级功能 → Boot: 05_bootloader/rkloader/loader_RK110A.bin → 下载
 ④ 导出原始镜像  RKDevTool → 高级功能 → 导出镜像（起始扇区 0，扇区数 220672）
                 → 立刻复制出来，改名 CSI100_原始固件.img  ★ 这是唯一的救砖文件
 ⑤ 打补丁        双击 02_一键修补/一键修补镜像.bat（会自动找到 ④ 的镜像；

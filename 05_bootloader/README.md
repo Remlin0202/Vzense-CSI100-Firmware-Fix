@@ -1,36 +1,33 @@
 # 05_bootloader —— 刷机用 loader
 
-## 用哪个？→ **两个都能用**；推荐 `rkloader/loader_RK110A.bin`
+## 用哪个？→ **`rkloader/loader_RK110A.bin`**
 
 RKDevTool 的 `高级功能` → `Boot:` 选它 → 点 `下载`。
 
-| 文件 | 芯片 ID 字段 | 说明 |
-|---|---|---|
-| **`rkloader/loader_RK110A.bin`** | `110A` | ★ **推荐** —— 与设备自报的 Chip Tag 一致 |
-| `rkloader/loader_RV1108.bin` | `1108` | 同样可用；**图文教程里用的就是这份** |
+```
+rkloader/loader_RK110A.bin    237,902 字节   md5 05debc9d6dc5f8c84aab162d619b5e3e
+```
 
-**证据**（RKDevTool → `高级功能` → 读取 Chip 信息，由相机自己报出）：
+> 早期还打包过一份芯片 ID 写作 `RV1108` 的同款 loader（`loader_RV1108.bin`）。
+> **实测两者都能正常载入**（这个字段只是标识，BROM 不会因为它不匹配就拒绝），
+> 因为 `RK110A` 才是设备自报的标识，那份**已删除**，只留现在这一份。
+
+### 为什么叫 RK110A（而不是 RV1108）
+
+RKDevTool → `高级功能` → 读取 Chip 信息，**相机自己报出**的是：
 
 ```
+获取ChipInfo开始
 Chip Tag:        31 31 30 41        ← ASCII 就是 "110A"
 Image Chip Flag: -RK110A
+获取ChipInfo成功
 ```
 
-⇒ 芯片的**标识是 `RK110A`**；`RV1108` 是它的**型号名**，两者是同一颗芯片。
+`31 31 30 41` 就是 `110A` 四个字节。loader 内部这个字段是按**小端 u32** 存的
+（字节序为 `41 30 31 31`），指的是同一个东西。
 
-**实测两个 loader 都能正常载入** —— 这个字段只是标识，BROM **不会**因为它不匹配就拒绝
-（否则 `RV1108` 那份也烧不进去）。所以**随便用哪个都行**；推荐 `RK110A` 那份，
-因为它和设备自报的标识对得上。
-
-### 两者的差异（只差 5 个字节）
-
-| 偏移 | `loader_RV1108.bin` | `loader_RK110A.bin` | 含义 |
-|---|---|---|---|
-| `0x15` | `'8'` | `'A'` | 芯片 ID 字符串（按字节反序读 = `1108` / `110A`） |
-| `0x3A14A~0x3A14D` | `10 33 04 C5` | `C7 CC 9C 60` | 尾部 4 字节校验（上面那个字段变了，校验跟着变） |
-
-两个文件都是 **237,902 字节**；md5 分别是 `06db4a378db3313c0c2af0bb83413182` /
-`05debc9d6dc5f8c84aab162d619b5e3e`。
+⇒ **`RK110A` 是这颗芯片的标识**；`RV1108` 是它的**型号名** —— 同一颗芯片的两个名字。
+loader 的芯片 ID 字段就写成了设备自报的那个。
 
 ---
 
@@ -41,7 +38,7 @@ Image Chip Flag: -RK110A
 | 零件（来自 Rockchip rkbin） | 大小 | 作用 |
 |---|---|---|
 | `bin/rv11/rv1108_ddr3_v1.12.bin` | 5,736 B | DDR3 初始化 |
-| `bin/rv11/rv110x_usbplug_v1.26.bin` | 112,168 B | USB 插件模式（BROM 里跑，负责接收） |
+| `bin/rv11/rv110x_usbplug_v1.26.bin` | 112,168 B | USB 插件模式（在 BROM 里跑，负责接收） |
 | `bin/rv11/rv110x_miniloader_v1.26.bin` | 112,588 B | miniloader（载入 DDR 后运行，提供读写 flash 的能力） |
 
 三件之和 = 230,492 B，`boot_merger` 加上组件头后 ≈ **237,902 B** ✓
