@@ -94,13 +94,6 @@ ros2 launch csi100_driver csi100_driver.launch.py
 
 ---
 
-## 贡献者
-
-- **Remlin0202** —— 硬件调试、固件逆向、方案验证
-- **deepseek** —— 文档整理、脚本实现、审校
-
----
-
 ## 许可
 
 原创部分（脚本、ROS 2 驱动、自己打包的 loader、教程）可自由使用与分发；第三方组件遵循各自许可。
