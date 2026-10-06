@@ -47,7 +47,7 @@ loader 的芯片 ID 字段就写成了设备自报的那个。
 **我们做的只有两件事**：① 选对零件与参数；② 让这个 Linux-only 工具在 ARM 板子上跑起来
 （`qemu-user-static` 用户态模拟；Windows 上则用 Docker）。
 
-打包命令（见 `build_on_board.sh` / `build_loader.bat`）：
+打包命令（完整脚本见 `rkloader/build_on_board.sh` 与 `rkloader/build_loader.bat`）：
 
 ```bash
 qemu-x86_64-static ./tools/boot_merger pack -c -RV1108 -v 1.4 \
@@ -58,6 +58,11 @@ qemu-x86_64-static ./tools/boot_merger pack -c -RV1108 -v 1.4 \
 ```
 ⚠️ `-c` 的值**必须带前导横线**；必须有 `pack` 子命令；v1.38 不吃 `.ini`。
 
+> **想自己重新打包的话**：本仓库**没有**附带 `rkbin` 与 `boot_merger`（那是 Rockchip 的
+> 5.7MB 内容），需要自己从 <https://github.com/rockchip-linux/rkbin> 取，
+> 放到 `rkloader/rkbin/` 后跑上面那个脚本即可。**只是想刷机的话完全不需要** ——
+> 直接用现成的 `loader_RK110A.bin`。
+>
 > 另：`boot_merger` 打包时还会**加密**这些组件，所以零件本身无法自行复现 ——
 > 只能用 Rockchip 提供的二进制。
 
